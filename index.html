@@ -3,69 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Formularz z JS</title>
+
+    <!-- Połączenie z plikiem CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Formularz główny -->
 <form id="appForm">
-    <!-- Pole tekstowe na imię -->
+
+    <!-- Pole na imię -->
     <input type="text" id="userName" placeholder="Imię">
 
-    <!-- Pole email -->
+    <!-- Pole na email -->
     <input type="email" id="userEmail" placeholder="Email">
 
-    <!-- Pole wiadomości -->
+    <!-- Pole na wiadomość -->
     <textarea id="userMessage" placeholder="Wiadomość"></textarea>
 
     <!-- Przycisk wysyłania -->
     <button id="sendBtn" type="submit">Wyślij</button>
 
-    <!-- Informacja dla użytkownika -->
+    <!-- Komunikat statusu -->
     <div id="status"></div>
 </form>
 
 <script>
-    /* Element formularza */
+    // Formularz
     const appForm = document.getElementById("appForm");
 
-    /* Pola formularza */
+    // Pola formularza
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userMessage = document.getElementById("userMessage");
 
-    /* Przycisk */
+    // Przycisk
     const sendBtn = document.getElementById("sendBtn");
 
-    /* Pole statusu */
+    // Pole statusu
     const statusBox = document.getElementById("status");
 
-    /* Obsługa formularza */
+    // Obsługa wysłania formularza
     appForm.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        /* Wartości z pól */
+        // Wartości z pól
         const nameValue = userName.value.trim();
         const emailValue = userEmail.value.trim();
         const messageValue = userMessage.value.trim();
 
-        /* Sprawdzenie poprawności */
+        // Sprawdzenie poprawności
         if (!nameValue || !emailValue || !messageValue) {
             statusBox.textContent = "Błąd danych";
             statusBox.style.color = "red";
             return;
         }
 
-        /* Blokada przycisku */
-        sendBtn.disabled = true;
-
-        /* Informacja o sukcesie */
+        // Informacja o wysłaniu
         statusBox.textContent = "Wysłano";
         statusBox.style.color = "green";
 
-        /* Reset formularza */
+        // Reset formularza
         appForm.reset();
-
-        /* Odblokowanie przycisku */
-        sendBtn.disabled = false;
     });
 </script>
 
