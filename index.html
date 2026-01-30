@@ -6,63 +6,66 @@
 </head>
 <body>
 
-<!-- Nagłówek strony -->
-<h2 style="text-align:center;">Formularz kontaktowy</h2>
+<form id="appForm">
+    <!-- Pole tekstowe na imię -->
+    <input type="text" id="userName" placeholder="Imię">
 
-<!-- Formularz -->
-<form id="kontaktForm">
+    <!-- Pole email -->
+    <input type="email" id="userEmail" placeholder="Email">
 
-    <!-- Pole: imię -->
-    <label>Imię:
-        <input type="text" id="imie">
-    </label>
-
-    <!-- Pole: email -->
-    <label>Email:
-        <input type="email" id="email">
-    </label>
-
-    <!-- Pole: wiadomość -->
-    <label>Wiadomość:
-        <textarea id="wiadomosc" rows="4"></textarea>
-    </label>
+    <!-- Pole wiadomości -->
+    <textarea id="userMessage" placeholder="Wiadomość"></textarea>
 
     <!-- Przycisk wysyłania -->
-    <button type="submit">Wyślij</button>
+    <button id="sendBtn" type="submit">Wyślij</button>
 
-    <!-- Miejsce na komunikat o błędzie -->
-    <div class="error" id="error"></div>
+    <!-- Informacja dla użytkownika -->
+    <div id="status"></div>
 </form>
 
-<!-- Skrypt JavaScript -->
 <script>
-    // Pobranie formularza i pola na błąd
-    const form = document.getElementById("kontaktForm");
-    const error = document.getElementById("error");
+    /* Element formularza */
+    const appForm = document.getElementById("appForm");
 
-    // Obsługa wysłania formularza
-    form.addEventListener("submit", function(e) {
+    /* Pola formularza */
+    const userName = document.getElementById("userName");
+    const userEmail = document.getElementById("userEmail");
+    const userMessage = document.getElementById("userMessage");
 
-        // Zatrzymuje domyślne wysyłanie formularza
+    /* Przycisk */
+    const sendBtn = document.getElementById("sendBtn");
+
+    /* Pole statusu */
+    const statusBox = document.getElementById("status");
+
+    /* Obsługa formularza */
+    appForm.addEventListener("submit", function(e) {
         e.preventDefault();
 
-        // Pobranie wartości z pól
-        const imie = document.getElementById("imie").value;
-        const email = document.getElementById("email").value;
-        const wiadomosc = document.getElementById("wiadomosc").value;
+        /* Wartości z pól */
+        const nameValue = userName.value.trim();
+        const emailValue = userEmail.value.trim();
+        const messageValue = userMessage.value.trim();
 
-        // Sprawdzenie czy pola są puste
-        if (imie === "" || email === "" || wiadomosc === "") {
-            error.textContent = "Uzupełnij wszystkie pola!";
+        /* Sprawdzenie poprawności */
+        if (!nameValue || !emailValue || !messageValue) {
+            statusBox.textContent = "Błąd danych";
+            statusBox.style.color = "red";
             return;
         }
 
-        // Czyszczenie błędu i komunikat sukcesu
-        error.textContent = "";
-        alert("Formularz wysłany!");
+        /* Blokada przycisku */
+        sendBtn.disabled = true;
 
-        // Reset formularza
-        form.reset();
+        /* Informacja o sukcesie */
+        statusBox.textContent = "Wysłano";
+        statusBox.style.color = "green";
+
+        /* Reset formularza */
+        appForm.reset();
+
+        /* Odblokowanie przycisku */
+        sendBtn.disabled = false;
     });
 </script>
 
