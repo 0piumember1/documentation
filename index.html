@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularz z JS</title>
+</head>
+<body>
+
+<!-- Nagłówek strony -->
+<h2 style="text-align:center;">Formularz kontaktowy</h2>
+
+<!-- Formularz -->
+<form id="kontaktForm">
+
+    <!-- Pole: imię -->
+    <label>Imię:
+        <input type="text" id="imie">
+    </label>
+
+    <!-- Pole: email -->
+    <label>Email:
+        <input type="email" id="email">
+    </label>
+
+    <!-- Pole: wiadomość -->
+    <label>Wiadomość:
+        <textarea id="wiadomosc" rows="4"></textarea>
+    </label>
+
+    <!-- Przycisk wysyłania -->
+    <button type="submit">Wyślij</button>
+
+    <!-- Miejsce na komunikat o błędzie -->
+    <div class="error" id="error"></div>
+</form>
+
+<!-- Skrypt JavaScript -->
+<script>
+    // Pobranie formularza i pola na błąd
+    const form = document.getElementById("kontaktForm");
+    const error = document.getElementById("error");
+
+    // Obsługa wysłania formularza
+    form.addEventListener("submit", function(e) {
+
+        // Zatrzymuje domyślne wysyłanie formularza
+        e.preventDefault();
+
+        // Pobranie wartości z pól
+        const imie = document.getElementById("imie").value;
+        const email = document.getElementById("email").value;
+        const wiadomosc = document.getElementById("wiadomosc").value;
+
+        // Sprawdzenie czy pola są puste
+        if (imie === "" || email === "" || wiadomosc === "") {
+            error.textContent = "Uzupełnij wszystkie pola!";
+            return;
+        }
+
+        // Czyszczenie błędu i komunikat sukcesu
+        error.textContent = "";
+        alert("Formularz wysłany!");
+
+        // Reset formularza
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
